@@ -1,0 +1,172 @@
+
+    <div>
+        <div class="left"><h2>Cart Items</h2></div> 
+        <div class="leftcler">
+            <h3>
+            <button (click)="clearAll()" class="btn btn-secondary" >Clear cart</button>
+        </h3>
+        </div>
+            </div>
+
+            <div class="outer">
+
+                <table>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>Title</th>
+                        <th>MRP</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>
+                            Remove
+                        </th>
+                    </tr>
+                </table>
+    
+<table class = "gfg">
+
+<tr *ngFor="let i of cartData" class="trBox">
+    <td>
+        <img src="https://bookcart.azurewebsites.net/Upload/{{i.book.coverFileName}}" alt="img" width="20%" height="auto"/>
+        
+    </td>
+<td>
+    <a routerLink="/bookdetail">{{i.book.title}}</a>
+   </td>
+<td>{{i.book.price}}</td>
+<td style="text-align: center; vertical-align: middle;">
+    <button class="minus" [disabled]="disableminus(i.quantity)" [style.opacity]="disableminus(i.quantity) ? '0.2' : '1'" (click)="submitDec(i.book.bookId)" >
+        <img src="../assets/minus.png" width="24"  />
+    </button>
+    
+   {{i.quantity}}
+   <img (click)="submitIncre(i.book.bookId)"  src="../assets/max.png" width="24" /> 
+</td>
+<td>
+    {{i.book.price*i.quantity}}
+</td>
+<td style="text-align: center; vertical-align: middle;">
+ <img (click)="removal(i.book.bookId)" height="30" src="../assets/trash.png" />
+</td>
+</tr>  
+<tr class="bottombox" *ngIf="cartData.length!=0">
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        <b>
+            Grand Total
+        </b>
+        </td>
+    <td>
+        {{total()}}
+    </td>
+    <td> <button class="btn btn-primary" [routerLink]="['/checkout']">CheckOut</button></td>
+</tr>
+<tr class="bottombox" *ngIf="cartData.length==0">
+    <td> <button class="btn btn-primary" [routerLink]="['/homepage']">Continue Shoping</button></td>
+</tr>
+</table>
+</div>
+
+
+<style>
+.bottombox{
+    box-shadow: 0 -1px 0px 1px #7d7676;
+}
+.outer{
+padding: 12px;
+box-shadow: 0px 1px 2px #7d7676;
+}   
+.left{
+    float: left;
+    width: 80%;
+    background-color: blueviolet;
+    color: white;
+    text-align: left;
+    padding-bottom: 10;
+}
+.leftcler{
+    width: 20%;
+    float: left;
+    background-color: blueviolet;
+    text-align: center;
+}
+.txtce{
+    text-align: center;
+}
+
+table {
+ border-collapse:collapse;
+ width: 100%;
+
+}
+.gfg {
+            border-collapse:separate;
+            border-spacing:0 15px;
+        }
+
+th{
+   padding: 12px;
+   width:150px;
+}
+
+.trBox, tr{
+    box-shadow: 0px 0px 2px #000;
+    margin-top: 20px;
+    border-spacing:10px 15px;
+}
+
+td {
+padding-top: 1em;
+padding-bottom: 1em;
+text-align: center;
+width:150px;
+}
+
+
+.btn {
+display: inline-block;
+font-weight: 400;
+color: #212529;
+text-align: center;
+vertical-align: middle;
+
+
+border: 1px solid transparent;
+
+font-size: 1rem;
+line-height: 1.5;
+
+
+
+}
+
+.btn-secondary {
+color: #fff;
+background-color: #6c757d;
+border-color: #6c757d;
+padding: 2px 22px;
+font-weight: 900;
+}
+
+.btn-primary {
+color: #fff;
+background-color: #ff5500;
+border-color: #ff5500;
+padding: 10px 20px;
+}
+
+#img1{
+background-image: url('../assets/trash.png');
+content: '';
+}
+.minus{
+border: none;
+background: none;
+}
+</style>
+    
+    
